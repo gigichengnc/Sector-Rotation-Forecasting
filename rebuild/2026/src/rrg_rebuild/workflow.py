@@ -195,7 +195,7 @@ def fetch_market_data(
 
     manifest_path = root / "manifest.csv"
     pd.DataFrame(manifest_rows).to_csv(manifest_path, index=False)
-    archive_path = archive_market_data(root, root.parent / "market-data.zip")
+    archive_path = archive_market_data(root, root.with_suffix(".zip"))
 
     return MarketDataFetch(
         root=root,
