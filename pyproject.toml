@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rrg-research-reconstruction"
+version = "0.1.0"
+description = "Reproducible sector RRG-style forecasting research toolkit"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  {name = "Gigi Cheng"},
+]
+keywords = [
+  "relative-rotation-graph",
+  "sector-rotation",
+  "time-series",
+  "forecasting",
+  "research-reproducibility",
+]
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/gigichengnc/RRG-Research-Reconstruction"
+Repository = "https://github.com/gigichengnc/RRG-Research-Reconstruction"
+Issues = "https://github.com/gigichengnc/RRG-Research-Reconstruction/issues"
+
+[project.scripts]
+rrg-research = "rrg_rebuild.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["rebuild/2026/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["rebuild/2026/tests"]
+addopts = "-q"
