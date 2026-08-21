@@ -16,8 +16,8 @@ def _default_output_dir(prefix: str) -> Path:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="rrg-research",
-        description="Reproducible sector RRG-style forecasting research toolkit.",
+        prog="sector-rotation",
+        description="Reproducible sector-rotation state forecasting research toolkit.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -35,7 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     forecast = subparsers.add_parser(
         "forecast",
-        help="Fetch fresh data and generate 1/2/4/8-week RRG-style forecasts.",
+        help="Fetch fresh data and generate 1/2/4/8-week relative-strength/momentum state forecasts.",
     )
     forecast.add_argument("--output-dir", type=Path)
     forecast.add_argument("--start", default="2018-01-01", help="UTC start date (YYYY-MM-DD).")
