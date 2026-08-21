@@ -20,6 +20,8 @@ jobs:
           python -m pip install -e . --no-deps --no-build-isolation
       - name: Test
         run: pytest
+      - name: Verify historical public subset
+        run: python historical/verify_public_subset.py
       - name: CLI smoke test
         run: sector-rotation version
 
@@ -44,4 +46,4 @@ jobs:
       - name: Installed-package smoke test
         run: |
           .wheel-venv/bin/sector-rotation version
-          .wheel-venv/bin/python -c "from rrg_rebuild import RRGConfig, DeploymentConfig; print(RRGConfig().ratio_period, DeploymentConfig().horizons)"
+          .wheel-venv/bin/python -c "from rrg_rebuild import RRGConfig, DeploymentConfig, SyntheticNullConfig; print(RRGConfig().ratio_period, DeploymentConfig().horizons, SyntheticNullConfig().n_trials)"
