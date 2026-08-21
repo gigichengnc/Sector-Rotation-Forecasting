@@ -76,7 +76,7 @@ def _network_fetch_payload(
     url = build_yahoo_chart_url(symbol, start_epoch, end_epoch)
     request = Request(
         url,
-        headers={"User-Agent": "RRG-Research-Reconstruction/0.1"},
+        headers={"User-Agent": "Sector-Rotation-Research/0.1"},
     )
     with urlopen(request, timeout=timeout_seconds) as response:
         raw = response.read()
