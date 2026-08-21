@@ -127,6 +127,31 @@ def test_fetch_manifest_uses_relative_paths_and_portable_archive(tmp_path: Path)
     assert weekly["week_end"].max() <= pd.Timestamp("2026-01-17T00:00:00Z")
 
 
+def test_fetch_archive_name_tracks_output_directory(tmp_path: Path) -> None:
+    first = fetch_market_data(
+        tmp_path / "market-data-20260821T100000Z",
+        start_date="2026-01-01",
+        end_date="2026-02-01",
+        symbols=("SPY",),
+        sleep_seconds=0,
+        fetcher=_fake_fetch,
+    )
+    second = fetch_market_data(
+        tmp_path / "market-data-20260821T100100Z",
+        start_date="2026-01-01",
+        end_date="2026-02-01",
+        symbols=("SPY",),
+        sleep_seconds=0,
+        fetcher=_fake_fetch,
+    )
+
+    assert first.archive_path == tmp_path / "market-data-20260821T100000Z.zip"
+    assert second.archive_path == tmp_path / "market-data-20260821T100100Z.zip"
+    assert first.archive_path != second.archive_path
+    assert first.archive_path.is_file()
+    assert second.archive_path.is_file()
+
+
 def test_fresh_forecast_workflow_runs_end_to_end_without_network(tmp_path: Path) -> None:
     result = run_fresh_forecast(
         tmp_path / "forecast",
