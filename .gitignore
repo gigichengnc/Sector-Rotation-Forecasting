@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Local data / outputs
+*.zip
+data/
+raw/
+cache/
+outputs/
+results-local/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

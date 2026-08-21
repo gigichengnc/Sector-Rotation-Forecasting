@@ -1,0 +1,37 @@
+[package]
+name = "rrg-web"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rrg-web"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+axum = { workspace = true, features = ["ws", "multipart"] }
+tower = { workspace = true }
+tower-http = { workspace = true, features = ["fs"] }
+reqwest = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+config = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+toml = "0.8"
+futures-util = "0.3"
+futures = "0.3"
+tokio-stream = { version = "0.1", features = ["sync"] }
+rrg-data = { path = "../data" }
+rrg-calc = { path = "../rrg-calc" }
+# rrg-ml = { path = "../ml" }  # Temporarily disabled due to dependency conflicts
+
+[dev-dependencies]
+proptest = { workspace = true }
+tokio-test = "0.4"
+tempfile = "3.8"
+tower = { workspace = true, features = ["util"] }

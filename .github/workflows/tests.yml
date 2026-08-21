@@ -1,0 +1,25 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: rebuild/2026
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: rebuild/2026/requirements-lock.txt
+      - name: Install locked environment
+        run: |
+          python -m pip install -r requirements-lock.txt
+          python -m pip install -e . --no-deps --no-build-isolation
+      - name: Test
+        run: pytest

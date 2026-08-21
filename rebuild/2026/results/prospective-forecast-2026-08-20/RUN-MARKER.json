@@ -1,0 +1,21 @@
+{
+  "mode": "prospective_deployment_forecast",
+  "generated_at_utc": "2026-08-20T15:13:43.950346+00:00",
+  "input_zip_sha256": "3838be08d18b238675ea02b9addce983799820abdf74eb40ac0e4ce8481b82bf",
+  "manifest_sha256": "4ec4b56f8f14f1c2b21bd60d9e440fd90fa108f83ed1e2c0959cc23ecd6b0c35",
+  "raw_payload_hashes_verified": 12,
+  "common_history_start": "2018-06-22 23:59:59.999999999+00:00",
+  "common_history_end": "2026-08-14 23:59:59.999999999+00:00",
+  "decision_timestamp": "2026-08-14 23:59:59.999999999+00:00",
+  "horizons": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "lookback": 20,
+  "model": "StandardScaler -> LinearRegression",
+  "target": "future RRG-style RS-Ratio and RS-Momentum coordinates",
+  "confidence_output": false,
+  "performance_claim": false
+}

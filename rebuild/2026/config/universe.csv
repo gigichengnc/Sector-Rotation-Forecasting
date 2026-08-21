@@ -1,0 +1,13 @@
+symbol,role,sector
+SPY,benchmark,Broad US equity market
+XLB,sector,Materials
+XLC,sector,Communication Services
+XLE,sector,Energy
+XLF,sector,Financials
+XLI,sector,Industrials
+XLK,sector,Technology
+XLP,sector,Consumer Staples
+XLRE,sector,Real Estate
+XLU,sector,Utilities
+XLV,sector,Health Care
+XLY,sector,Consumer Discretionary

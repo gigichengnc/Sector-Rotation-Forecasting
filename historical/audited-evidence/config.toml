@@ -1,0 +1,73 @@
+# RRG Application Configuration Template
+# Copy this file to config.toml and customize as needed
+
+[server]
+host = "127.0.0.1"
+port = 3000
+cors_origins = ["*"]
+max_request_size = 1048576  # 1MB
+request_timeout_seconds = 30
+
+[database]
+cache_directory = "./data/cache"
+max_cache_size_mb = 1024  # 1GB
+cache_ttl_hours = 24
+compression_enabled = true
+
+[data_collection]
+api_base_url = "https://query1.finance.yahoo.com"
+rate_limit_requests_per_minute = 60
+retry_attempts = 3
+retry_delay_seconds = 5
+symbols = [
+    "XLK",  # Technology
+    "XLF",  # Financial
+    "XLE",  # Energy
+    "XLV",  # Healthcare
+    "XLI",  # Industrial
+    "XLY",  # Consumer Discretionary
+    "XLP",  # Consumer Staples
+    "XLU",  # Utilities
+    "XLB",  # Materials
+]
+benchmark_symbol = "SPY"
+
+[ml]
+lstm_input_size = 10
+lstm_hidden_size = 50
+lstm_num_layers = 2
+sequence_length = 20
+training_epochs = 100
+learning_rate = 0.001
+batch_size = 32
+validation_split = 0.2
+model_save_path = "./models"
+retrain_threshold_accuracy = 0.8
+
+[alerts]
+enabled = true
+quadrant_transition_threshold = 0.1
+momentum_threshold = 0.05
+alert_cooldown_minutes = 60
+notification_channels = []
+
+[performance]
+monitoring_enabled = true
+max_connections = 100
+connection_timeout_ms = 30000
+idle_timeout_ms = 300000
+
+[performance.performance_bounds.data_fetch]
+operation = "data_fetch"
+max_duration_ms = 30000
+warning_threshold_ms = 10000
+
+[performance.performance_bounds.rrg_calculation]
+operation = "rrg_calculation"
+max_duration_ms = 5000
+warning_threshold_ms = 2000
+
+[performance.performance_bounds.ml_prediction]
+operation = "ml_prediction"
+max_duration_ms = 10000
+warning_threshold_ms = 5000

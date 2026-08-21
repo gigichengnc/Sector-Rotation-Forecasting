@@ -1,0 +1,20 @@
+{
+  "mode": "exploratory_economic_value_backtest",
+  "generated_at_utc": "2026-08-20T15:28:42.238038+00:00",
+  "strategy_contract_sha256": "a0611e717e1c5f11aec9f0c1d8948c108d844e72e2dd45d548b710fdbfd19cd2",
+  "input_zip_sha256": "3838be08d18b238675ea02b9addce983799820abdf74eb40ac0e4ce8481b82bf",
+  "manifest_sha256": "4ec4b56f8f14f1c2b21bd60d9e440fd90fa108f83ed1e2c0959cc23ecd6b0c35",
+  "raw_payload_hashes_verified": 12,
+  "common_weekly_start": "2018-06-22 23:59:59.999999999+00:00",
+  "common_weekly_end": "2026-08-14 23:59:59.999999999+00:00",
+  "signal_first_decision": "2022-03-18 23:59:59.999999999+00:00",
+  "signal_last_decision": "2026-08-14 23:59:59.999999999+00:00",
+  "horizon": 1,
+  "lookback": 20,
+  "min_training_rows": 156,
+  "top_k": 3,
+  "transaction_cost_per_dollar": 0.001,
+  "model": "StandardScaler -> LinearRegression",
+  "parameter_search": false,
+  "confirmatory_holdout": false
+}
