@@ -71,7 +71,7 @@ rrg-research fetch
 
 This preserves the provider URL, acquisition time, raw-payload hash, relative raw-data path, processed adjusted-close series, and a portable ZIP for later research/reproduction.
 
-### 3. Reuse the core research functions from Python
+### 3. Use the core research functions from Python
 
 The public package surface includes the transparent RRG-style calculator and the frozen prospective deployment workflow:
 
@@ -86,9 +86,11 @@ from rrg_rebuild import (
 
 The import package remains `rrg_rebuild` to preserve the reconstruction lineage; the installable distribution is `rrg-research-reconstruction`, and the user-facing CLI is `rrg-research`.
 
+The package is technically installable and executable, but this repository does **not yet grant an open-source license**. See [`NOTICE.md`](NOTICE.md) before reuse, redistribution, or incorporation into another project.
+
 ### 4. Inspect or extend the methodology
 
-Researchers can replace or add candidate models while retaining the same time-aware validation, persistence baseline, target definitions, and research boundaries. More model complexity is not treated as progress unless it improves out-of-sample evidence under the same protocol.
+Researchers can inspect or locally modify candidate models while retaining the same time-aware validation, persistence baseline, target definitions, and research boundaries. More model complexity is not treated as progress unless it improves out-of-sample evidence under the same protocol.
 
 ## Quick start
 
