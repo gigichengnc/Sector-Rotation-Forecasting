@@ -2,6 +2,8 @@
 
 This repository does not currently grant an open-source license.
 
+Copyright © 2026 Gigi Cheng in the original 2026 reconstruction code and documentation, unless otherwise stated. Historical evidence and third-party material remain subject to their applicable rights.
+
 The historical evidence files are published for retrospective audit and research/portfolio documentation. The 2026 reconstruction is published for review and reproducibility.
 
 References to HKSI, Relative Rotation Graph (RRG), and JdK terminology are used only to describe the project's historical competition context or methodological reference point. This independent repository is not affiliated with or endorsed by HKSI or RRG Research, and no rights in third-party names or marks are claimed.
