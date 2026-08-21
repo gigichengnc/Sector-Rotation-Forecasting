@@ -21,7 +21,7 @@ jobs:
       - name: Test
         run: pytest
       - name: CLI smoke test
-        run: rrg-research version
+        run: sector-rotation version
 
   distribution:
     runs-on: ubuntu-24.04
@@ -43,5 +43,5 @@ jobs:
           .wheel-venv/bin/python -m pip install dist/*.whl --no-deps
       - name: Installed-package smoke test
         run: |
-          .wheel-venv/bin/rrg-research version
+          .wheel-venv/bin/sector-rotation version
           .wheel-venv/bin/python -c "from rrg_rebuild import RRGConfig, DeploymentConfig; print(RRGConfig().ratio_period, DeploymentConfig().horizons)"
