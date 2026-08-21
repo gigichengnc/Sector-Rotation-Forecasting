@@ -3,17 +3,18 @@ requires = ["setuptools>=75", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rrg-research-reconstruction"
+name = "sector-rotation-research"
 version = "0.1.0"
-description = "Reproducible sector RRG-style forecasting research toolkit"
+description = "Reproducible sector-rotation state forecasting research toolkit"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
   {name = "Gigi Cheng"},
 ]
 keywords = [
-  "relative-rotation-graph",
   "sector-rotation",
+  "relative-strength",
+  "momentum",
   "time-series",
   "forecasting",
   "research-reproducibility",
@@ -30,7 +31,7 @@ Repository = "https://github.com/gigichengnc/RRG-Research-Reconstruction"
 Issues = "https://github.com/gigichengnc/RRG-Research-Reconstruction/issues"
 
 [project.scripts]
-rrg-research = "rrg_rebuild.cli:main"
+sector-rotation = "rrg_rebuild.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
