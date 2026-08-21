@@ -54,9 +54,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     if args.command == "fetch":
-        output_dir = args.output_dir or _default_output_dir("market-data")
+        run_dir = args.output_dir or _default_output_dir("market-data")
         result = fetch_market_data(
-            output_dir,
+            run_dir / "market-data",
             start_date=args.start,
             end_date=args.end,
             sleep_seconds=args.sleep,
