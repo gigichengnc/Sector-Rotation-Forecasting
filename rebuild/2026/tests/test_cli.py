@@ -13,6 +13,11 @@ def test_public_package_surface_has_version_and_core_types() -> None:
     assert DeploymentConfig().horizons == (1, 2, 4, 8)
 
 
+def test_cli_uses_generic_public_name() -> None:
+    parser = cli.build_parser()
+    assert parser.prog == "sector-rotation"
+
+
 def test_cli_version(capsys) -> None:
     assert cli.main(["version"]) == 0
     assert capsys.readouterr().out.strip() == "0.1.0"
