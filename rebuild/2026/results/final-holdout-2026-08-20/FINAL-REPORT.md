@@ -1,65 +1,70 @@
 # RRG 2026 Final Holdout Result
 
-## Status
+## v0.2 post-publication correction
 
-The frozen final holdout has now been opened and scored.
+This file preserves the original v0.1 holdout outputs, but **withdraws the earlier interpretation that the result demonstrated market predictability**.
 
-**Do not use these results for further model selection or tuning.**
+A later structural-null benchmark showed that the same coordinate-forecast pipeline produces a similar linear-vs-persistence advantage on synthetic geometric random walks with no serial predictability. The old result therefore remains a record of what the model scored, not evidence that recent sector rotation contains forecastable market information.
+
+See `rebuild/2026/docs/v0.2-null-audit.md`.
+
+## Original frozen holdout protocol
 
 Protocol: `rrg-final-holdout-v1-2026-08-20`
 
-- target window: 2025-08-22 23:59:59.999999999+00:00 through 2026-08-14 23:59:59.999999999+00:00
+- target window: 2025-08-22 through 2026-08-14 UTC
 - 52 target weeks per sector/horizon
 - 11 sector ETFs
-- 572 final observations per model/horizon
+- 572 **scored rows** per model/horizon
 - lookback: 20 weekly observations
-- frozen model: StandardScaler -> LinearRegression
+- frozen model: `StandardScaler -> LinearRegression`
 - refit policy: `fixed_at_first_holdout_decision_per_symbol_horizon`
 - holdout reuse allowed: **false**
 
-## Final aggregate results
+The 572 rows are not 572 independent observations. Sectors share the same benchmark, cross-sectional returns are correlated, and multi-week targets overlap through time.
+
+## Recorded aggregate outputs
 
 | Horizon | Linear accuracy | Persistence accuracy | Linear advantage | Linear coordinate distance | Persistence distance | Distance reduction |
 |---:|---:|---:|---:|---:|---:|---:|
 | 1 week | 80.6% | 74.0% | +6.6 pp | 4.404 | 6.554 | 32.8% |
-| 2 week | 75.5% | 62.8% | +12.8 pp | 5.983 | 9.317 | 35.8% |
-| 4 week | 69.9% | 50.0% | +19.9 pp | 8.180 | 13.687 | 40.2% |
-| 8 week | 51.7% | 29.5% | +22.2 pp | 11.508 | 20.651 | 44.3% |
+| 2 weeks | 75.5% | 62.8% | +12.8 pp | 5.983 | 9.317 | 35.8% |
+| 4 weeks | 69.9% | 50.0% | +19.9 pp | 8.180 | 13.687 | 40.2% |
+| 8 weeks | 51.7% | 29.5% | +22.2 pp | 11.508 | 20.651 | 44.3% |
 
-Across the four horizons, Linear averaged 69.4% quadrant accuracy
-versus 54.1% for persistence. Using the aggregate coordinate
-distance across horizons, Linear reduced error by
-40.1%.
+These are historical scoring outputs in the project's transparent RRG-style state space. They are not trading returns, expected returns, calibrated probabilities, or evidence of proprietary JdK equivalence.
 
-At the sector × horizon level, Linear had lower continuous coordinate error in
-**44/44** cells. It had higher quadrant accuracy in **43/44**
-cells and lower quadrant accuracy in **1/44** cells. The single
-quadrant-accuracy loss was XLU at the 1-week horizon; its continuous coordinate
-distance was still lower for Linear.
+## Structural-null comparison added in v0.2
 
-## Development vs final Linear
+Across 12 no-signal synthetic trials using the same target mechanics and holdout geometry:
+
+| Horizon | Null Linear accuracy | Null persistence | Null edge |
+|---:|---:|---:|---:|
+| 1 week | 81.0% | 72.8% | +8.2 pp |
+| 2 weeks | 73.8% | 63.2% | +10.6 pp |
+| 4 weeks | 63.2% | 50.5% | +12.8 pp |
+| 8 weeks | 47.4% | 31.9% | +15.5 pp |
+
+At one week, the no-signal Linear accuracy is approximately the same as the real-data value. This is the material reason the old market-signal interpretation is retired.
+
+The null does not prove that no residual signal exists at longer horizons. It shows that persistence was an inadequate sole benchmark and that any residual edge must be evaluated against structural-null behaviour with dependence-aware uncertainty.
+
+## Development versus final Linear
 
 | Horizon | Development accuracy | Final accuracy | Change | Development distance | Final distance |
 |---:|---:|---:|---:|---:|---:|
 | 1 week | 82.5% | 80.6% | -1.9 pp | 4.400 | 4.404 |
-| 2 week | 75.6% | 75.5% | -0.1 pp | 5.991 | 5.983 |
-| 4 week | 63.9% | 69.9% | +6.1 pp | 8.257 | 8.180 |
-| 8 week | 48.9% | 51.7% | +2.9 pp | 11.492 | 11.508 |
+| 2 weeks | 75.6% | 75.5% | -0.1 pp | 5.991 | 5.983 |
+| 4 weeks | 63.9% | 69.9% | +6.1 pp | 8.257 | 8.180 |
+| 8 weeks | 48.9% | 51.7% | +2.9 pp | 11.492 | 11.508 |
 
-The final coordinate errors are extremely close to the development values at 1, 2,
-and 8 weeks, and slightly better at 4 weeks. This is consistent with the frozen
-linear baseline retaining its development behaviour on the untouched period.
+v0.1 described these values as consistent with the frozen model retaining its development behaviour. **v0.2 withdraws that interpretation.** A holdout being better than development is not evidence of generalisation or stability. These differences may reflect sampling variation, period difficulty, dependence, or regime composition.
 
-These figures are prediction metrics in the project's transparent RRG-style state
-space. They are **not trading returns** and do not validate the historical 2025
-“65–75% accuracy” claim because the old target/validation contract was not recovered.
+No formal confidence interval or dependence-aware hypothesis test was attached to the original table.
 
 ## Execution note
 
-The first authorized invocation of the frozen runner stopped before any RRG
-calculation, target materialization, prediction, or performance metric was produced.
-The processed CSV schema used `source_timestamp_utc, adjusted_close`, while the runner
-expected `timestamp, adj_close`.
+The first authorized invocation of the frozen runner stopped before any RRG calculation, target materialization, prediction, or performance metric was produced because the processed CSV schema did not match the runner.
 
 A schema-only adapter then mapped:
 
@@ -67,20 +72,14 @@ A schema-only adapter then mapped:
 - `adjusted_close` -> `adj_close`
 - added the known symbol column
 
-No model, target, split, price values, horizon, lookback, RRG formula, training rule,
-or evaluation metric was changed. The output directory did not exist after the failed
-attempt, and no holdout result had been observed before the corrected execution.
+No model, target, split, price values, horizon, lookback, RRG formula, training rule, or evaluation metric was changed. No holdout result had been observed before the corrected execution.
 
-The completed run then wrote `RUN-MARKER.json` with
-`holdout_reuse_allowed: false`.
+This execution detail is kept at the same level as the result rather than only in a deeper appendix.
 
-## Interpretation
+## Current interpretation
 
-The final result supports a narrower and more defensible conclusion than the 2025
-presentation:
+The defensible statement is now:
 
-> In this 2026 reconstruction, a fixed two-output linear regression using 20 weeks
-> of RRG-style coordinate history outperformed a current-state persistence baseline
-> on the untouched 52-week holdout at all four forecast horizons.
+> The frozen v0.1 linear model outscored current-state persistence on the recorded coordinate holdout, but a post-publication structural-null benchmark reproduced much of that advantage without market predictability. The old holdout therefore does not establish forecastable sector-market signal.
 
-It does not establish profitability, causality, or a proprietary JdK-equivalent model.
+The 2025-08-22 to 2026-08-14 holdout is retired for new confirmatory claims and must not be reused as an untouched test for redesigned targets or new models.

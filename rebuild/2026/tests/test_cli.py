@@ -8,7 +8,7 @@ from rrg_rebuild import cli
 
 
 def test_public_package_surface_has_version_and_core_types() -> None:
-    assert __version__ == "0.1.0"
+    assert __version__ == "0.2.0"
     assert RRGConfig().ratio_period == 10
     assert DeploymentConfig().horizons == (1, 2, 4, 8)
 
@@ -20,7 +20,7 @@ def test_cli_uses_generic_public_name() -> None:
 
 def test_cli_version(capsys) -> None:
     assert cli.main(["version"]) == 0
-    assert capsys.readouterr().out.strip() == "0.1.0"
+    assert capsys.readouterr().out.strip() == "0.2.0"
 
 
 def test_cli_forecast_dispatches_without_network(monkeypatch, tmp_path: Path, capsys) -> None:

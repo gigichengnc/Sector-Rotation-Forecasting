@@ -1,16 +1,33 @@
 # Public historical evidence subset
 
-The private recovered 2025 source-only archive contains **137 files**. This sanitized public release does **not** publish the complete historical archive.
+The private recovered 2025 source-only archive contains **137 files**. This public repository intentionally exposes only a small curated evidence subset.
 
-Only the files below are included because they directly support material findings in the retrospective audit. Their SHA-256 values are calculated from the recovered archive bytes.
+## v0.2 provenance correction
 
-| Public evidence file | Bytes | SHA-256 | Main audit purpose |
+The first public manifest incorrectly listed 15 evidence files. Three of those paths were never actually committed to the public repository:
+
+- `crates/data/src/data_fetcher.rs`
+- `crates/data/src/external_data.rs`
+- `crates/data/src/etf_data.rs`
+
+They are therefore removed from the public subset inventory below. No additional private historical source is being published merely to repair the manifest while the competition/IP boundary remains unresolved.
+
+The 12 files that are actually public were copied from text files whose recovered-archive bytes used CRLF line endings. Git stored the public checkout with LF line endings. Their original archive SHA-256 values therefore do not match the raw Git checkout bytes directly, even though the text content is otherwise equivalent.
+
+To make that transformation explicit and verifiable, this repository now includes:
+
+```bash
+python historical/verify_public_subset.py
+```
+
+The verifier converts the public text checkout to the recovered archive's CRLF convention and then checks the original byte count and SHA-256. CI runs this verifier. This is a **content-equivalence check under a documented line-ending transformation**, not a claim that the raw Git blob bytes equal the recovered archive bytes.
+
+## Verified public evidence files
+
+| Public evidence file | Recovered archive bytes | Recovered archive SHA-256 | Main audit purpose |
 |---|---:|---|---|
-| `historical-root/README.md` | 6381 | `46fb1e63dac583d7cbaa4a32fd94059dcb7877df552f11eec82dbcbf7613046b` | Historical presentation / API claims |
+| `README.md` | 6381 | `46fb1e63dac583d7cbaa4a32fd94059dcb7877df552f11eec82dbcbf7613046b` | Historical presentation / API claims |
 | `config.toml` | 1718 | `4356831f3531caf312c423b9b821dd9f030f8900fe24b21da0822d848ea458cf` | Historical configuration and model settings |
-| `crates/data/src/data_fetcher.rs` | 8318 | `c476e50be3ee822f93e66c6337b0dab740756690d6f64c361716d48e35949243` | Yahoo Finance HTTP path, adjusted-close handling |
-| `crates/data/src/external_data.rs` | 16523 | `d9987ffd7c96ffb3106d21569da7a61f8c35924e7c168c36c1f6b0795821ed28` | Simulated VIX / interest-rate features |
-| `crates/data/src/etf_data.rs` | 5091 | `62281034fda37f5fe83fb5119da31cd4e3db552dae65ffed72a2bedfa49fb2d5` | Sector ETF data structures / universe evidence |
 | `crates/rrg-calc/src/calculator.rs` | 22341 | `afebb1e98531495ed833a281437ffd55e8d0cfa2b0a60fb5595b9a608dba251d` | Historical RRG-style calculation |
 | `crates/rrg-calc/src/quadrant.rs` | 13243 | `bb0e5df0ae335a14f77dbf3b3981c177265271df77a0b359c29babf0f9a7dc87` | Quadrant assignment logic |
 | `crates/ml/src/lstm_predictor.rs` | 21468 | `8a01d6cb1d4c4e2648ab0253ff987fa35b7c2cead483057a7c881d8289807f9c` | LSTM-like state processor and linear baseline |
@@ -22,6 +39,10 @@ Only the files below are included because they directly support material finding
 | `crates/web/src/api.rs` | 43865 | `a5661d8339e566102721c0ef7203d0df88c295143dea0b79d7f42980e40f37e9` | Placeholder ML API and hard-coded accuracy |
 | `app-standalone/app.js` | 19602 | `5325b05cad5599691e08e20608b7ac5593b19b9a34f792a9cc37130d568a91c1` | Simulated/random standalone UI outputs |
 
-The complete private archive is intentionally excluded to reduce disclosure risk and avoid publishing generated, duplicated, obsolete, or nonessential artifacts such as `.kiro/` specifications and `OLD Assets/`.
+## Claims no longer publicly substantiated by this subset
 
-The complete file-name/hash inventory remains available in [`SOURCE-MANIFEST.md`](SOURCE-MANIFEST.md).
+The private recovered archive/audit record also referred to a concrete Yahoo data fetcher, simulated external VIX/rate features, and sector-universe data structures. Because the three source files listed above are not public, those specific implementation claims should **not** be treated as independently verifiable from this repository's public evidence subset.
+
+The detailed `2025-source-audit.md` is retained as a record of the static audit performed against the recovered archive, but public readers should use this file to distinguish what is and is not substantiated by committed evidence.
+
+The complete private archive remains intentionally excluded. `SOURCE-MANIFEST.md` is a recovered source inventory, not a statement that every listed source file is publicly available.
