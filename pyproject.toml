@@ -26,9 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/gigichengnc/RRG-Research-Reconstruction"
-Repository = "https://github.com/gigichengnc/RRG-Research-Reconstruction"
-Issues = "https://github.com/gigichengnc/RRG-Research-Reconstruction/issues"
+Homepage = "https://github.com/gigichengnc/Sector-Rotation-Forecasting"
+Repository = "https://github.com/gigichengnc/Sector-Rotation-Forecasting"
+Issues = "https://github.com/gigichengnc/Sector-Rotation-Forecasting/issues"
 
 [project.scripts]
 sector-rotation = "rrg_rebuild.cli:main"
