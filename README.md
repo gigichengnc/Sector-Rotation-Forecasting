@@ -1,16 +1,33 @@
-# Sector Rotation Forecasting Reconstruction
+# Sector Rotation Forecasting
 
 [![Tests](https://github.com/gigichengnc/Sector-Rotation-Forecasting/actions/workflows/tests.yml/badge.svg)](https://github.com/gigichengnc/Sector-Rotation-Forecasting/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](pyproject.toml)
 [![Research status](https://img.shields.io/badge/status-post--publication%20audit-orange.svg)](#current-research-conclusion)
 
-I first conceived and started this **sector-rotation forecasting project for an HKSI competition in December 2025**. In 2026 I returned to the surviving source, audited the implementation, rebuilt the research workflow, and then subjected the rebuilt result to a second post-publication audit.
+**A reproducible audit and rebuild of a 2025 RRG-style sector-forecasting prototype.**
 
-The project began with a simple question:
+The main finding is now methodological, not a forecasting headline: the legacy coordinate target can produce a similar linear-model advantage on synthetic geometric random walks with no serial predictability. The old **80.6% vs 74.0%** result is therefore retained as experiment history but **retired as evidence of market predictability**.
 
-> Can recent sector-rotation history help predict what happens next?
+The redesigned research question uses fully future sector return relative to SPY as the target. No new market-signal claim is made yet.
 
-The historical project was inspired by Relative Rotation Graph (RRG) concepts. This repository uses an independently developed, transparent **RRG-style approximation** based on relative strength and momentum. It does **not** claim proprietary JdK RS-Ratio / RS-Momentum equivalence.
+## Run it
+
+```bash
+python -m pip install -r rebuild/2026/requirements-lock.txt
+python -m pip install -e . --no-deps --no-build-isolation
+pytest
+python rebuild/2026/scripts/run_synthetic_null.py
+```
+
+The package also retains the legacy coordinate-forecast workflow:
+
+```bash
+sector-rotation forecast
+```
+
+> **Interpretation boundary:** `sector-rotation forecast` produces auditable RRG-style coordinate forecasts, not expected returns, calibrated probabilities, buy/sell signals, or validated evidence of market predictability. The first forecast-driven top-3 strategy was not supported by its backtest.
+
+This project was conceived for an HKSI competition in December 2025 and later reconstructed and audited independently. It is not affiliated with or endorsed by HKSI or RRG Research.
 
 ## Current research conclusion
 
