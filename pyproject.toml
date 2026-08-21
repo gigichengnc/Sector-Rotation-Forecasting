@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sector-rotation-research"
+version = "0.1.0"
+description = "Reproducible sector-rotation state forecasting research toolkit"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  {name = "Gigi Cheng"},
+]
+keywords = [
+  "sector-rotation",
+  "relative-strength",
+  "momentum",
+  "time-series",
+  "forecasting",
+  "research-reproducibility",
+]
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/gigichengnc/Sector-Rotation-Forecasting"
+Repository = "https://github.com/gigichengnc/Sector-Rotation-Forecasting"
+Issues = "https://github.com/gigichengnc/Sector-Rotation-Forecasting/issues"
+
+[project.scripts]
+sector-rotation = "rrg_rebuild.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["rebuild/2026/src"]
+
+[tool.pytest.ini_options]
+testpaths = ["rebuild/2026/tests"]
+addopts = "-q"

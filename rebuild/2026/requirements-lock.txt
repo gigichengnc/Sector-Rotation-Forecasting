@@ -1,6 +1,6 @@
 # Environment resolved by the successful GitHub Actions PR run on 2026-08-20.
 # Python: 3.11.16
-# Install these first, then install the local package with:
+# From the repository root, install these first, then install the local package with:
 #   python -m pip install -e . --no-deps --no-build-isolation
 
 iniconfig==2.3.0

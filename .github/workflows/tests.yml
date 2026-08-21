@@ -7,9 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: rebuild/2026
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,7 +16,32 @@ jobs:
           cache-dependency-path: rebuild/2026/requirements-lock.txt
       - name: Install locked environment
         run: |
-          python -m pip install -r requirements-lock.txt
+          python -m pip install -r rebuild/2026/requirements-lock.txt
           python -m pip install -e . --no-deps --no-build-isolation
       - name: Test
         run: pytest
+      - name: CLI smoke test
+        run: sector-rotation version
+
+  distribution:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: rebuild/2026/requirements-lock.txt
+      - name: Build wheel from repository root
+        run: |
+          python -m pip install -r rebuild/2026/requirements-lock.txt
+          python -m pip wheel . --no-deps --no-build-isolation --wheel-dir dist
+      - name: Install wheel into clean virtual environment
+        run: |
+          python -m venv .wheel-venv
+          .wheel-venv/bin/python -m pip install -r rebuild/2026/requirements-lock.txt
+          .wheel-venv/bin/python -m pip install dist/*.whl --no-deps
+      - name: Installed-package smoke test
+        run: |
+          .wheel-venv/bin/sector-rotation version
+          .wheel-venv/bin/python -c "from rrg_rebuild import RRGConfig, DeploymentConfig; print(RRGConfig().ratio_period, DeploymentConfig().horizons)"
