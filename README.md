@@ -10,7 +10,7 @@ The original idea was simple:
 
 > Can the future relative-strength and momentum state of US market sectors be forecast from their recent rotation history, rather than used only as a descriptive snapshot?
 
-The historical project was inspired by Relative Rotation Graph (RRG) concepts. In plain language, the reconstructed state space compares each sector with a benchmark using two dimensions — **relative strength** and **momentum** — and maps the result into four states: **Leading, Weakening, Lagging, or Improving**.
+The historical project was inspired by Relative Rotation Graph (RRG) concepts. In plain language, the reconstructed state space compares each sector with a benchmark using two dimensions: **relative strength** and **momentum**. It then maps the result into four states: **Leading, Weakening, Lagging, or Improving**.
 
 This repository implements an independently developed, transparent **RRG-style approximation**. It does **not** claim proprietary JdK RS-Ratio / RS-Momentum equivalence.
 
@@ -28,7 +28,7 @@ References to HKSI, Relative Rotation Graph (RRG), and JdK terminology are descr
 | 2026 reconstruction | Reproducible Python forecasting pipeline with causal, time-aware validation |
 | Reference model | 20 weeks of state history → `StandardScaler` → two-output `LinearRegression` |
 | Predictive evidence | Outperformed persistence on the frozen 52-week holdout at 1/2/4/8-week horizons |
-| Economic-value test | **Not supported** — the first forecast-driven top-3 strategy underperformed simpler comparators |
+| Economic-value test | **Not supported.** The first forecast-driven top-3 strategy underperformed simpler comparators |
 | Current usable tool | `sector-rotation forecast` |
 | Interpretation boundary | Forecasts RRG-style states, **not expected returns, probabilities, or buy/sell signals** |
 
@@ -46,7 +46,7 @@ Start with `README.md`, install the package from the repository root, then use t
 
 | Path | Do you need to open it? | Purpose |
 | --- | --- | --- |
-| `README.md` | **Yes — start here** | Project overview and usage instructions |
+| `README.md` | **Yes, start here** | Project overview and usage instructions |
 | `pyproject.toml` | No manual editing | Defines the installable package and `sector-rotation` command |
 | `rebuild/2026/requirements-lock.txt` | No manual editing | Tested dependency versions used by the recorded research environment |
 | `rebuild/2026/src/rrg_rebuild/` | No | Actual Python implementation used by the installed package |
