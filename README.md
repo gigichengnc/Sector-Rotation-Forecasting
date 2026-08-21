@@ -1,28 +1,62 @@
-# RRG Research Reconstruction
+# Sector Rotation Forecasting Reconstruction
 
 [![Tests](https://github.com/gigichengnc/RRG-Research-Reconstruction/actions/workflows/tests.yml/badge.svg)](https://github.com/gigichengnc/RRG-Research-Reconstruction/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](pyproject.toml)
 [![Research status](https://img.shields.io/badge/status-research%20toolkit-orange.svg)](#limits)
 
-An installable research toolkit and retrospective reconstruction of a **2025 student sector-rotation prototype** that explored whether Relative Rotation Graph (RRG) states could be forecast rather than used only descriptively.
+A research reconstruction of a **sector-rotation forecasting project first initiated during an HKSI competition in December 2025**.
 
-The repository has two deliberately separate jobs:
+The original idea was simple:
 
-- `historical/` preserves a **curated audited subset** of a recovered 137-file historical source archive, plus the complete file/hash inventory;
-- `rebuild/2026/` contains the reproducible forecasting reconstruction, validation contracts, recorded results, prospective forecast logic, and a separately declared economic-value backtest.
+> Can the future relative-strength and momentum state of US market sectors be forecast from their recent rotation history, rather than used only as a descriptive snapshot?
 
-The full historical archive, original development Git history, and frozen raw market-data archive are not published here.
+The historical project was inspired by Relative Rotation Graph (RRG) concepts. In plain language, the reconstructed state space compares each sector with a benchmark using two dimensions — **relative strength** and **momentum** — and maps the result into four states: **Leading, Weakening, Lagging, or Improving**.
 
-> **Main research lesson:** better prediction of future RRG-style coordinates did **not** automatically translate into a better trading strategy.
+This repository implements an independently developed, transparent **RRG-style approximation**. It does **not** claim proprietary JdK RS-Ratio / RS-Momentum equivalence.
+
+> **Main research lesson:** a simple forecasting model improved prediction of future RRG-style sector states versus a persistence baseline, but the first pre-declared trading strategy built from those forecasts did **not** outperform simpler comparators.
+
+References to HKSI, Relative Rotation Graph (RRG), and JdK terminology are descriptive historical or methodological references only. This independent repository is not affiliated with or endorsed by HKSI or RRG Research.
+
+## Project snapshot
+
+| Item | Current project state |
+| --- | --- |
+| Project origin | Initiated during an HKSI competition in December 2025 |
+| Original question | Can future sector relative-strength / momentum states be forecast? |
+| Historical implementation | Substantial 2025 Rust prototype preserved as a curated audited evidence subset |
+| 2026 reconstruction | Reproducible Python forecasting pipeline with causal, time-aware validation |
+| Reference model | 20 weeks of state history → `StandardScaler` → two-output `LinearRegression` |
+| Predictive evidence | Outperformed persistence on the frozen 52-week holdout at 1/2/4/8-week horizons |
+| Economic-value test | **Not supported** — the first forecast-driven top-3 strategy underperformed simpler comparators |
+| Current usable tool | `sector-rotation forecast` |
+| Interpretation boundary | Forecasts RRG-style states, **not expected returns, probabilities, or buy/sell signals** |
+
+## From the 2025 prototype to the 2026 reconstruction
+
+The 2025 project contained real implementation work, but the surviving source also exposed important methodological gaps. The reconstruction keeps the history visible rather than silently rewriting it.
+
+| 2025 prototype | 2026 reconstruction |
+| --- | --- |
+| RRG implementation without evidence of proprietary JdK equivalence | Explicit transparent **RRG-style approximation** with a stated scope |
+| Web prediction routes included placeholders | Prospective forecast output comes from an actually fitted model workflow |
+| A displayed `0.75` model accuracy was hard-coded | Reported accuracy comes from explicit out-of-sample evaluation |
+| Historical “LSTM” was not a trained LSTM network | Model descriptions match the implementation actually evaluated |
+| Preprocessing / walk-forward slicing raised leakage concerns | Fold-local preprocessing and chronological validation |
+| Surviving VIX/rate features were simulated | Rebuild uses reproducible adjusted-close inputs only |
+| Parts of the historical backtest were placeholders | Economic value is tested separately under a pre-declared strategy contract |
+| Prediction and trading value could be conflated | Predictive performance and portfolio performance are reported separately |
+
+The full historical archive, original development Git history, and frozen raw market-data archive are not published in this repository. `historical/` instead contains a **curated audited subset** plus the complete recovered source file/hash inventory.
 
 ## What can you do with it?
 
-### 1. Generate a fresh prospective RRG-style forecast
+### 1. Generate a fresh prospective sector-state forecast
 
 After installation, run:
 
 ```bash
-rrg-research forecast
+sector-rotation forecast
 ```
 
 The command:
@@ -38,7 +72,7 @@ aligns one common weekly history
         ↓
 calculates transparent causal RRG-style coordinates
         ↓
-fits the frozen StandardScaler -> LinearRegression deployment workflow
+fits the pre-specified StandardScaler -> LinearRegression deployment pipeline
         ↓
 forecasts 1 / 2 / 4 / 8-week future RRG-style coordinates and quadrants
         ↓
@@ -59,21 +93,30 @@ forecast-YYYYMMDDTHHMMSSZ/
 └── RUN-MARKER.json
 ```
 
-`forecast_table.csv` is the compact human-readable output. It reports the current quadrant and the model's predicted RRG-style coordinates/quadrants at each horizon.
+`forecast_table.csv` is the compact human-readable output. Conceptually it looks like this:
 
-It does **not** report expected returns, calibrated probabilities, buy/sell signals, or a claim of profitable trading performance.
+```text
+symbol   current      1w          2w          4w          8w
+XLK      Improving    Leading     Leading     Weakening   Weakening
+XLE      Lagging      Improving   Improving   Leading     Leading
+...
+```
+
+The rows above are **illustrative format only**, not a current market forecast.
+
+The real output reports current and predicted RRG-style coordinates/quadrants. It does **not** report expected returns, calibrated probabilities, buy/sell signals, or a claim of profitable trading performance.
 
 ### 2. Fetch a versioned market-data archive without forecasting
 
 ```bash
-rrg-research fetch
+sector-rotation fetch
 ```
 
-This preserves the provider URL, acquisition time, raw-payload hash, relative raw-data path, processed adjusted-close series, and a portable ZIP for later research/reproduction.
+This preserves the provider URL, acquisition time, raw-payload hash, relative raw-data path, processed adjusted-close series, and a portable ZIP for later research/reproduction. Repeated default runs use timestamped locations so prior archives are not silently overwritten.
 
 ### 3. Use the core research functions from Python
 
-The public package surface includes the transparent RRG-style calculator and the frozen prospective deployment workflow:
+The public package surface includes the transparent RRG-style calculator and the prospective deployment workflow:
 
 ```python
 from rrg_rebuild import (
@@ -84,9 +127,9 @@ from rrg_rebuild import (
 )
 ```
 
-The import package remains `rrg_rebuild` to preserve the reconstruction lineage; the installable distribution is `rrg-research-reconstruction`, and the user-facing CLI is `rrg-research`.
+The internal Python import package remains `rrg_rebuild` to preserve the reconstruction lineage. The installable distribution is **`sector-rotation-research`**, and the user-facing CLI is **`sector-rotation`**.
 
-The package is technically installable and executable, but this repository does **not yet grant an open-source license**. See [`NOTICE.md`](NOTICE.md) before reuse, redistribution, or incorporation into another project.
+The software is technically installable and executable, but this repository does **not yet grant an open-source license**. See [`NOTICE.md`](NOTICE.md) before reuse, redistribution, or incorporation into another project.
 
 ### 4. Inspect or extend the methodology
 
@@ -113,22 +156,22 @@ For the recorded research environment:
 python -m pip install -r rebuild/2026/requirements-lock.txt
 python -m pip install -e . --no-deps --no-build-isolation
 pytest
-rrg-research version
+sector-rotation version
 ```
 
 Generate a fresh forecast:
 
 ```bash
-rrg-research forecast
+sector-rotation forecast
 ```
 
 Choose an explicit output directory if desired:
 
 ```bash
-rrg-research forecast --output-dir outputs/my-forecast
+sector-rotation forecast --output-dir outputs/my-forecast
 ```
 
-The GitHub Actions workflow also builds a wheel, installs that wheel into a clean virtual environment, and smoke-tests the installed `rrg-research` command.
+The GitHub Actions workflow also builds a wheel, installs that wheel into a clean virtual environment, and smoke-tests the installed `sector-rotation` command.
 
 ## Main predictive finding
 
@@ -227,7 +270,7 @@ The package CLI exposes the **prospective deployment** path. Historical audit to
 
 ```text
 .
-├── pyproject.toml                    # installable package + rrg-research CLI
+├── pyproject.toml                    # installable package + sector-rotation CLI
 ├── historical/                       # audited 2025 evidence and source manifest
 ├── rebuild/2026/
 │   ├── src/rrg_rebuild/              # research/library implementation
@@ -249,10 +292,12 @@ Provider endpoints and provider access policies can change independently of this
 
 ## Limits
 
-This project is a **research reconstruction and forecasting toolkit**. It is not:
+This project is a **research reconstruction and sector-state forecasting toolkit**. It is not:
 
 - investment advice;
 - a production trading system;
+- an official HKSI project or an HKSI-endorsed project;
+- an official RRG Research product or an RRG Research-endorsed project;
 - a claim of proprietary JdK RS-Ratio / RS-Momentum equivalence;
 - an expected-return model;
 - a calibrated probability model;
