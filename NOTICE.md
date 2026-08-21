@@ -1,5 +1,7 @@
 # Notice
 
-This sanitized bundle does not include an open-source license.
+This repository does not currently grant an open-source license.
 
-The historical evidence files are included for retrospective audit and portfolio/research documentation. The 2026 reconstruction is included for review and reproducibility. Add a license only after confirming that the rights and intended reuse terms for both historical and reconstructed material are appropriate.
+The historical evidence files are published for retrospective audit and research/portfolio documentation. The 2026 reconstruction is published for review and reproducibility.
+
+The software is technically installable and runnable, but broader reuse, redistribution, or incorporation into another project should wait until an explicit license is added. Licensing should be chosen only after confirming the intended rights boundary between the historical evidence and the reconstructed 2026 code.
