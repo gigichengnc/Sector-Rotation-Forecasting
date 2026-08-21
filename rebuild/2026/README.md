@@ -1,6 +1,6 @@
 # 2026 rebuild
 
-This directory contains the research-first reconstruction of the 2025 RRG prototype.
+This directory contains the research-first reconstruction of the sector-rotation forecasting prototype first initiated in late 2025.
 
 The installable package now lives at the **repository root**. From the root checkout, install with:
 
@@ -12,7 +12,7 @@ python -m pip install -e . --no-deps --no-build-isolation
 The user-facing command is:
 
 ```bash
-rrg-research forecast
+sector-rotation forecast
 ```
 
 That CLI exposes the prospective deployment path. The final-holdout, model-selection, and strategy scripts remain research/reproduction tools rather than ordinary end-user commands.
@@ -41,7 +41,7 @@ That CLI exposes the prospective deployment path. The final-holdout, model-selec
 - `src/rrg_rebuild/modeling.py` — lagged features, LinearRegression pipeline, metrics.
 - `src/rrg_rebuild/deployment.py` — prospective model fitting/forecast logic.
 - `src/rrg_rebuild/workflow.py` — fresh-data acquisition, provenance/archive creation, and one-command prospective workflow.
-- `src/rrg_rebuild/cli.py` — `rrg-research` package CLI.
+- `src/rrg_rebuild/cli.py` — `sector-rotation` package CLI.
 - `src/rrg_rebuild/holdout.py` / `scripts/run_final_holdout.py` — frozen one-time final evaluation guards.
 - `scripts/forecast_from_archive.py` — archived-data prospective reproduction path.
 - `src/rrg_rebuild/strategy.py` / `scripts/backtest_strategy.py` — separately declared economic-value experiment.
