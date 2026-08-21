@@ -1,10 +1,10 @@
 # Sector Rotation Forecasting Reconstruction
 
-[![Tests](https://github.com/gigichengnc/RRG-Research-Reconstruction/actions/workflows/tests.yml/badge.svg)](https://github.com/gigichengnc/RRG-Research-Reconstruction/actions/workflows/tests.yml)
+[![Tests](https://github.com/gigichengnc/Sector-Rotation-Forecasting/actions/workflows/tests.yml/badge.svg)](https://github.com/gigichengnc/Sector-Rotation-Forecasting/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3.11-blue.svg)](pyproject.toml)
 [![Research status](https://img.shields.io/badge/status-research%20toolkit-orange.svg)](#limits)
 
-A research reconstruction of a **sector-rotation forecasting project first initiated during an HKSI competition in December 2025**.
+I first conceived and started this **sector-rotation forecasting project for an HKSI competition in December 2025**. This repository documents how I later audited, reconstructed, and developed the original idea into a more reproducible research workflow.
 
 The original idea was simple:
 
@@ -22,7 +22,7 @@ References to HKSI, Relative Rotation Graph (RRG), and JdK terminology are descr
 
 | Item | Current project state |
 | --- | --- |
-| Project origin | Initiated during an HKSI competition in December 2025 |
+| Project origin | Conceived and initiated by the repository author for an HKSI competition in December 2025 |
 | Original question | Can future sector relative-strength / momentum states be forecast? |
 | Historical implementation | Substantial 2025 Rust prototype preserved as a curated audited evidence subset |
 | 2026 reconstruction | Reproducible Python forecasting pipeline with causal, time-aware validation |
@@ -31,6 +31,64 @@ References to HKSI, Relative Rotation Graph (RRG), and JdK terminology are descr
 | Economic-value test | **Not supported** — the first forecast-driven top-3 strategy underperformed simpler comparators |
 | Current usable tool | `sector-rotation forecast` |
 | Interpretation boundary | Forecasts RRG-style states, **not expected returns, probabilities, or buy/sell signals** |
+
+## If you just want to use it
+
+You do **not** need to open or run the research files manually.
+
+For a normal forecast run, you only need:
+
+- Python 3.11;
+- this repository;
+- an internet connection for fresh market data.
+
+Start with `README.md`, install the package from the repository root, then use the `sector-rotation` command. The installer handles the package files for you.
+
+| Path | Do you need to open it? | Purpose |
+| --- | --- | --- |
+| `README.md` | **Yes — start here** | Project overview and usage instructions |
+| `pyproject.toml` | No manual editing | Defines the installable package and `sector-rotation` command |
+| `rebuild/2026/requirements-lock.txt` | No manual editing | Tested dependency versions used by the recorded research environment |
+| `rebuild/2026/src/rrg_rebuild/` | No | Actual Python implementation used by the installed package |
+| `historical/` | No | Historical audit evidence and recovered-source inventory |
+| `rebuild/2026/docs/` | No | Research methodology and validation contracts |
+| `rebuild/2026/results/` | No | Recorded experiment evidence |
+| `rebuild/2026/scripts/` | Advanced/reproduction only | Research runners, holdout reproduction, and strategy experiments |
+| `rebuild/2026/tests/` | No | Automated validation tests |
+
+Clone and enter the repository:
+
+```bash
+git clone https://github.com/gigichengnc/Sector-Rotation-Forecasting.git
+cd Sector-Rotation-Forecasting
+```
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+```text
+Windows PowerShell: .\.venv\Scripts\Activate.ps1
+macOS/Linux:        source .venv/bin/activate
+```
+
+Install the tested dependencies and this package:
+
+```bash
+python -m pip install -r rebuild/2026/requirements-lock.txt
+python -m pip install -e . --no-deps --no-build-isolation
+```
+
+Check the installation and run a forecast:
+
+```bash
+sector-rotation version
+sector-rotation forecast
+```
+
+After installation, normal users interact with the project through `sector-rotation`. You do **not** need to run individual `.py` files.
 
 ## From the 2025 prototype to the 2026 reconstruction
 
@@ -135,22 +193,9 @@ The software is technically installable and executable, but this repository does
 
 Researchers can inspect or locally modify candidate models while retaining the same time-aware validation, persistence baseline, target definitions, and research boundaries. More model complexity is not treated as progress unless it improves out-of-sample evidence under the same protocol.
 
-## Quick start
+## Quick start for research/reproduction
 
-Clone the repository and, from the repository root:
-
-```bash
-python -m venv .venv
-```
-
-Activate it:
-
-```text
-Windows PowerShell: .\.venv\Scripts\Activate.ps1
-macOS/Linux:        source .venv/bin/activate
-```
-
-For the recorded research environment:
+The section above is enough for normal use. If you also want to run the test suite and reproduce the recorded research environment, from the repository root:
 
 ```bash
 python -m pip install -r rebuild/2026/requirements-lock.txt
@@ -270,15 +315,17 @@ The package CLI exposes the **prospective deployment** path. Historical audit to
 
 ```text
 .
-├── pyproject.toml                    # installable package + sector-rotation CLI
+├── README.md                         # start here: explanation + user instructions
+├── pyproject.toml                    # installer/package metadata + sector-rotation CLI
+├── NOTICE.md                         # rights and third-party naming notice
 ├── historical/                       # audited 2025 evidence and source manifest
 ├── rebuild/2026/
 │   ├── src/rrg_rebuild/              # research/library implementation
 │   ├── tests/                        # unit/regression tests
 │   ├── docs/                         # frozen research and validation contracts
-│   ├── scripts/                      # research/reproduction runners
+│   ├── scripts/                      # advanced research/reproduction runners
 │   ├── results/                      # compact recorded experiment evidence
-│   └── requirements-lock.txt         # frozen successful research environment
+│   └── requirements-lock.txt         # tested research dependency environment
 └── .github/workflows/tests.yml       # tests + clean-wheel validation
 ```
 
