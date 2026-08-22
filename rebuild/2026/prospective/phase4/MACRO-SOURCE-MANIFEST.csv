@@ -1,0 +1,5 @@
+series,description,source,provider,url,latest_month,latest_value,provider_last_updated,retrieved_for_phase4_on
+GS10,10-Year Treasury Rate monthly average,Board of Governors of the Federal Reserve System (US),FRED,https://fred.stlouisfed.org/series/GS10,2026-07,4.60,2026-08-03,2026-08-22
+GS2,2-Year Treasury Rate monthly average,Board of Governors of the Federal Reserve System (US),FRED,https://fred.stlouisfed.org/series/GS2,2026-07,4.22,2026-08-03,2026-08-22
+MCOILWTICO,WTI crude oil monthly average,U.S. Energy Information Administration,FRED,https://fred.stlouisfed.org/series/MCOILWTICO,2026-07,80.46,2026-08-05,2026-08-22
+TWEXBGSMTH,Nominal Broad U.S. Dollar Index monthly,Board of Governors of the Federal Reserve System (US),FRED,https://fred.stlouisfed.org/series/TWEXBGSMTH,2026-07,120.5970,2026-08-03,2026-08-22
